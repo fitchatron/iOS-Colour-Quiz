@@ -3,27 +3,52 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0915F1F123C4955E000D0F51 /* PauseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0915F1F023C4955E000D0F51 /* PauseView.swift */; };
 		09206919235F21560017FD31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09206918235F21560017FD31 /* AppDelegate.swift */; };
 		0920691B235F21560017FD31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0920691A235F21560017FD31 /* SceneDelegate.swift */; };
-		0920691D235F21560017FD31 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0920691C235F21560017FD31 /* ContentView.swift */; };
+		0920691D235F21560017FD31 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0920691C235F21560017FD31 /* HomeView.swift */; };
 		0920691F235F215C0017FD31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0920691E235F215C0017FD31 /* Assets.xcassets */; };
 		09206922235F215C0017FD31 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09206921235F215C0017FD31 /* Preview Assets.xcassets */; };
 		09206925235F215C0017FD31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09206923235F215C0017FD31 /* LaunchScreen.storyboard */; };
+		093B9A1323D3E35000CFE459 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093B9A1223D3E35000CFE459 /* HomeViewModel.swift */; };
+		0957440023C0A36100A382B5 /* QuizController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095743FF23C0A36100A382B5 /* QuizController.swift */; };
+		0957440323C0A3EF00A382B5 /* LBTATools in Frameworks */ = {isa = PBXBuildFile; productRef = 0957440223C0A3EF00A382B5 /* LBTATools */; };
+		0978DFA1236EE0060072BC97 /* QuizWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978DFA0236EE0060072BC97 /* QuizWord.swift */; };
+		0978DFA3236EE0670072BC97 /* QuizButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978DFA2236EE0670072BC97 /* QuizButton.swift */; };
+		0978DFA5236EE1830072BC97 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0978DFA4236EE1830072BC97 /* QuizView.swift */; };
+		098FFCF6236075F700667908 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FFCF5236075F700667908 /* HowToPlayView.swift */; };
+		09983ED823C18E5500054700 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09983ED723C18E5500054700 /* OptionButton.swift */; };
+		09983EDA23C18F0700054700 /* RoundedQuizButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09983ED923C18F0700054700 /* RoundedQuizButton.swift */; };
+		09983EDC23C1FF6400054700 /* QuizCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09983EDB23C1FF6400054700 /* QuizCheck.swift */; };
+		09983EDE23C201F200054700 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09983EDD23C201F200054700 /* HomeController.swift */; };
+		09AC6AD123D1C79A00995FA2 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC6AD023D1C79A00995FA2 /* QuizViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0915F1F023C4955E000D0F51 /* PauseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseView.swift; sourceTree = "<group>"; };
 		09206915235F21560017FD31 /* ColourQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColourQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09206918235F21560017FD31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0920691A235F21560017FD31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0920691C235F21560017FD31 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0920691C235F21560017FD31 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0920691E235F215C0017FD31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09206921235F215C0017FD31 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		09206924235F215C0017FD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09206926235F215C0017FD31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		093B9A1223D3E35000CFE459 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		095743FF23C0A36100A382B5 /* QuizController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizController.swift; sourceTree = "<group>"; };
+		0978DFA0236EE0060072BC97 /* QuizWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizWord.swift; sourceTree = "<group>"; };
+		0978DFA2236EE0670072BC97 /* QuizButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizButton.swift; sourceTree = "<group>"; };
+		0978DFA4236EE1830072BC97 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		098FFCF5236075F700667908 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
+		09983ED723C18E5500054700 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
+		09983ED923C18F0700054700 /* RoundedQuizButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedQuizButton.swift; sourceTree = "<group>"; };
+		09983EDB23C1FF6400054700 /* QuizCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCheck.swift; sourceTree = "<group>"; };
+		09983EDD23C201F200054700 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		09AC6AD023D1C79A00995FA2 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0957440323C0A3EF00A382B5 /* LBTATools in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,13 +82,16 @@
 		09206917235F21560017FD31 /* ColourQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				0978DF9F236EDFE40072BC97 /* Model */,
+				098FFCF72360761F00667908 /* View */,
 				09206918235F21560017FD31 /* AppDelegate.swift */,
 				0920691A235F21560017FD31 /* SceneDelegate.swift */,
-				0920691C235F21560017FD31 /* ContentView.swift */,
 				0920691E235F215C0017FD31 /* Assets.xcassets */,
 				09206923235F215C0017FD31 /* LaunchScreen.storyboard */,
 				09206926235F215C0017FD31 /* Info.plist */,
 				09206920235F215C0017FD31 /* Preview Content */,
+				09983EDD23C201F200054700 /* HomeController.swift */,
+				095743FF23C0A36100A382B5 /* QuizController.swift */,
 			);
 			path = ColourQuiz;
 			sourceTree = "<group>";
@@ -73,6 +102,39 @@
 				09206921235F215C0017FD31 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0978DF9F236EDFE40072BC97 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0978DFA0236EE0060072BC97 /* QuizWord.swift */,
+				0978DFA2236EE0670072BC97 /* QuizButton.swift */,
+				09983EDB23C1FF6400054700 /* QuizCheck.swift */,
+				09AC6AD023D1C79A00995FA2 /* QuizViewModel.swift */,
+				093B9A1223D3E35000CFE459 /* HomeViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		098FFCF72360761F00667908 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				09983ED923C18F0700054700 /* RoundedQuizButton.swift */,
+				09983ED723C18E5500054700 /* OptionButton.swift */,
+				0915F1F023C4955E000D0F51 /* PauseView.swift */,
+				09983ED623C18DA400054700 /* SwiftUI */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09983ED623C18DA400054700 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				0920691C235F21560017FD31 /* HomeView.swift */,
+				098FFCF5236075F700667908 /* HowToPlayView.swift */,
+				0978DFA4236EE1830072BC97 /* QuizView.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -91,6 +153,9 @@
 			dependencies = (
 			);
 			name = ColourQuiz;
+			packageProductDependencies = (
+				0957440223C0A3EF00A382B5 /* LBTATools */,
+			);
 			productName = ColourQuiz;
 			productReference = 09206915235F21560017FD31 /* ColourQuiz.app */;
 			productType = "com.apple.product-type.application";
@@ -119,6 +184,9 @@
 				Base,
 			);
 			mainGroup = 0920690C235F21560017FD31;
+			packageReferences = (
+				0957440123C0A3EF00A382B5 /* XCRemoteSwiftPackageReference "LBTATools" */,
+			);
 			productRefGroup = 09206916235F21560017FD31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -146,9 +214,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098FFCF6236075F700667908 /* HowToPlayView.swift in Sources */,
 				09206919235F21560017FD31 /* AppDelegate.swift in Sources */,
+				0915F1F123C4955E000D0F51 /* PauseView.swift in Sources */,
+				0978DFA1236EE0060072BC97 /* QuizWord.swift in Sources */,
 				0920691B235F21560017FD31 /* SceneDelegate.swift in Sources */,
-				0920691D235F21560017FD31 /* ContentView.swift in Sources */,
+				0978DFA5236EE1830072BC97 /* QuizView.swift in Sources */,
+				0957440023C0A36100A382B5 /* QuizController.swift in Sources */,
+				09983EDC23C1FF6400054700 /* QuizCheck.swift in Sources */,
+				09983EDA23C18F0700054700 /* RoundedQuizButton.swift in Sources */,
+				093B9A1323D3E35000CFE459 /* HomeViewModel.swift in Sources */,
+				09AC6AD123D1C79A00995FA2 /* QuizViewModel.swift in Sources */,
+				09983EDE23C201F200054700 /* HomeController.swift in Sources */,
+				0978DFA3236EE0670072BC97 /* QuizButton.swift in Sources */,
+				0920691D235F21560017FD31 /* HomeView.swift in Sources */,
+				09983ED823C18E5500054700 /* OptionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"ColourQuiz/Preview Content\"";
 				DEVELOPMENT_TEAM = NQJ874U236;
 				ENABLE_PREVIEWS = YES;
@@ -305,6 +386,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"ColourQuiz/Preview Content\"";
 				DEVELOPMENT_TEAM = NQJ874U236;
 				ENABLE_PREVIEWS = YES;
@@ -342,6 +424,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0957440123C0A3EF00A382B5 /* XCRemoteSwiftPackageReference "LBTATools" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bhlvoong/LBTATools.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.17;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0957440223C0A3EF00A382B5 /* LBTATools */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0957440123C0A3EF00A382B5 /* XCRemoteSwiftPackageReference "LBTATools" */;
+			productName = LBTATools;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0920690D235F21560017FD31 /* Project object */;
 }
