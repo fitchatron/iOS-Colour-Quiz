@@ -33,7 +33,7 @@ struct GameView: View {
                 }
                 
                 HStack {
-                    Text("Time Left: \(viewModel.time)")
+                    Text("Time Left: \(viewModel.timeRemaining)")
                         .font(.system(size: 18))
                         .bold()
                     
@@ -43,10 +43,10 @@ struct GameView: View {
             .padding()
             
             Spacer()
-            Text("\(viewModel.quizOption.text.stringify.capitalized)")
+            Text("\(viewModel.quizQuestion.text.stringify.capitalized)")
                 .font(.system(size: 42))
                 .bold()
-                .foregroundColor(viewModel.quizOption.colour)
+                .foregroundColor(viewModel.quizQuestion.colour)
             
             Spacer()
             HStack {
@@ -88,12 +88,12 @@ struct GameView: View {
             
             .navigationTitle("Colour Quiz")
             .onReceive(viewModel.timer) { time in
-                
-                guard viewModel.isActive else { return }
-                
-                if viewModel.time > 0 {
-                    viewModel.time -= 1
-                }
+                viewModel.handleTimerChange()
+//                guard viewModel.isActive else { return }
+//
+//                if viewModel.timeRemaining > 0 {
+//                    viewModel.timeRemaining -= 1
+//                }
             }
             .onChange(of: scenePhase) { newPhase in
                 if newPhase == .active {
