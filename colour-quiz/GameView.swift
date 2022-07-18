@@ -43,15 +43,15 @@ struct GameView: View {
             .padding()
             
             Spacer()
-            Text("\(viewModel.quizWordColour.stringify)")
+            Text("\(viewModel.quizOption.text.stringify.capitalized)")
                 .font(.system(size: 42))
                 .bold()
-                .foregroundColor(viewModel.quizWordColour)
+                .foregroundColor(viewModel.quizOption.colour)
             
             Spacer()
             HStack {
                 Button {
-                    print(viewModel.firstButtonColour)
+                    print(viewModel.firstColour.stringify)
                 } label: {
                     Circle()
                         .overlay(
@@ -59,11 +59,11 @@ struct GameView: View {
                                 .stroke(Color(.label), lineWidth: 6)
                         )
                         .padding()
-                        .foregroundColor(viewModel.firstButtonColour)
+                        .foregroundColor(viewModel.firstColour)
                 }
                 
                 Button {
-                    print(viewModel.secondButtonColour)
+                    print(viewModel.secondColour.stringify)
                 } label: {
                     Circle()
                         .overlay(
@@ -71,7 +71,7 @@ struct GameView: View {
                                 .stroke(Color(.label), lineWidth: 6)
                         )
                         .padding()
-                        .foregroundColor(viewModel.secondButtonColour)
+                        .foregroundColor(viewModel.secondColour)
                 }
                 
             }
