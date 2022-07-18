@@ -43,7 +43,7 @@ struct GameView: View {
             .padding()
             
             Spacer()
-            Text("\(viewModel.quizWordText)")
+            Text("\(viewModel.quizWordColour.stringify)")
                 .font(.system(size: 42))
                 .bold()
                 .foregroundColor(viewModel.quizWordColour)
