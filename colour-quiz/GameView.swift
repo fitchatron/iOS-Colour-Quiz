@@ -14,94 +14,178 @@ struct GameView: View {
     var body: some View {
         NavigationStack {
             
-            VStack {
-                HStack {
-                    Text("Score: \(viewModel.score)")
-                        .font(.system(size: 26))
-                        .bold()
-                    
-                    Spacer()
-                }
+            ZStack {
+                PlayingView(viewModel: viewModel)
                 
-                
-                HStack {
-                    Text("High Score: \(viewModel.highScore)")
-                        .font(.system(size: 18))
-                        .bold()
-                    
-                    Spacer()
-                }
-                
-                HStack {
-                    Text("Time Left: \(viewModel.timeRemaining)")
-                        .font(.system(size: 18))
-                        .bold()
-                    
-                    Spacer()
+                if viewModel.gameState == .paused {
+                    PauseView(viewModel: viewModel)
                 }
             }
-            .padding()
+                .navigationTitle(viewModel.navTitle)
+                .onAppear { viewModel.handleStartGame()}
+                .onReceive(viewModel.timer) { time in viewModel.handleTimerChange() }
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+//                        viewModel.isActive = true
+                        viewModel.gameState = .paused
+                    } else {
+//                        viewModel.isActive = false
+                        viewModel.gameState = .inactive
+                    }
+                }
+        }
+    }
+}
+
+struct PauseView: View {
+    
+    @ObservedObject var viewModel: GameViewModel
+    
+    var body: some View {
+        Color(.systemBackground)
+            .opacity(0.9)
+            .edgesIgnoringSafeArea(.horizontal)
+            .edgesIgnoringSafeArea(.top)
+        
+        VStack {
+            InfoView(score: viewModel.score, highScore: viewModel.highScore, timeRemaining: viewModel.timeRemaining)
+            
+            Text("Game paused. Take your time to do you.")
+                .font(.headline)
             
             Spacer()
-            Text("\(viewModel.quizQuestion.text.stringify.capitalized)")
-                .font(.system(size: 42))
-                .bold()
-                .foregroundColor(viewModel.quizQuestion.colour)
+            
+            Button {
+                viewModel.togglePauseGame()
+            } label: {
+                Label("Resume", systemImage: "play.circle.fill")
+            }
+            .buttonStyle(.borderedProminent)
+
+        }
+        .padding()
+        .background(Color(.systemBackground))
+    }
+}
+struct PlayingView: View {
+    @ObservedObject var viewModel: GameViewModel
+    
+    var body: some View {
+        VStack {
+            InfoView(score: viewModel.score, highScore: viewModel.highScore, timeRemaining: viewModel.timeRemaining)
+            
+            HStack {
+                Button {
+                    viewModel.togglePauseGame()
+                } label: {
+                    Label("Pause", systemImage: "pause.circle.fill")
+                }
+                .buttonStyle(.borderedProminent)
+                
+                Spacer()
+            }
+            .padding(.horizontal)
+            
+            Spacer()
+            QuestionView(quizQuestion: viewModel.quizQuestion)
             
             Spacer()
             HStack {
                 Button {
-                    print(viewModel.firstColour.stringify)
+                    viewModel.handleButtonTapped(colour: viewModel.firstColour)
                 } label: {
-                    Circle()
-                        .overlay(
-                            Circle()
-                                .stroke(Color(.label), lineWidth: 6)
-                        )
-                        .padding()
-                        .foregroundColor(viewModel.firstColour)
+                    ColourQuizButtonView(colour: viewModel.firstColour)
                 }
+                .disabled(viewModel.isButtonDisabled)
+                .tag(1)
                 
                 Button {
-                    print(viewModel.secondColour.stringify)
+                    viewModel.handleButtonTapped(colour: viewModel.secondColour)
                 } label: {
-                    Circle()
-                        .overlay(
-                            Circle()
-                                .stroke(Color(.label), lineWidth: 6)
-                        )
-                        .padding()
-                        .foregroundColor(viewModel.secondColour)
+                    ColourQuizButtonView(colour: viewModel.secondColour)
                 }
-                
+                .disabled(viewModel.isButtonDisabled)
+                .tag(2)
             }
             .padding(.bottom)
             
+            LivesCounterView(lives: viewModel.lives)
+        }
+    }
+}
+
+struct InfoView: View {
+    let score: Int
+    let highScore: Int
+    let timeRemaining: Int
+    
+    var body: some View {
+        VStack {
             HStack {
-                ForEach(1..<4, content: { num in
-                    Rectangle()
-                        .foregroundColor(.pink)
-                        .frame(height: 12)
-                        .opacity(num > viewModel.lives ? 0.2 : 1)
-                })
+                Text("Score: \(score)")
+                    .font(.system(size: 26))
+                    .bold()
+                
+                Spacer()
             }
             
-            .navigationTitle("Colour Quiz")
-            .onReceive(viewModel.timer) { time in
-                viewModel.handleTimerChange()
-//                guard viewModel.isActive else { return }
-//
-//                if viewModel.timeRemaining > 0 {
-//                    viewModel.timeRemaining -= 1
-//                }
+            HStack {
+                Text("High Score: \(highScore)")
+                    .font(.system(size: 18))
+                    .bold()
+                
+                Spacer()
             }
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .active {
-                    viewModel.isActive = true
-                } else {
-                    viewModel.isActive = false
-                }
+            
+            HStack {
+                Text("Time Left: \(timeRemaining)")
+                    .font(.system(size: 18))
+                    .bold()
+                
+                Spacer()
             }
+        }
+        .padding()
+    }
+}
+
+struct QuestionView: View {
+    let quizQuestion: QuizQuestion
+    
+    var body: some View {
+        Text("\(quizQuestion.text.stringify.capitalized)")
+            .font(.system(size: 42))
+            .bold()
+            .foregroundColor(quizQuestion.colour)
+    }
+}
+
+
+struct ColourQuizButtonView: View {
+    let colour: Color
+    
+    var body: some View {
+        Circle()
+            .overlay(
+                Circle()
+                    .stroke(Color(.label), lineWidth: 6)
+            )
+            .padding()
+            .foregroundColor(colour)
+    }
+}
+
+struct LivesCounterView: View {
+    let lives: Int
+    
+    var body: some View {
+        HStack {
+            ForEach(1..<4, content: { num in
+                Rectangle()
+                    .foregroundColor(.pink)
+                    .frame(height: 12)
+                    .opacity(num > lives ? 0.2 : 1)
+            })
         }
     }
 }

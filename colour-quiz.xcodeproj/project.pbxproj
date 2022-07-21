@@ -13,6 +13,7 @@
 		09134F6B287B9A7E007753C6 /* colour_quizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09134F6A287B9A7E007753C6 /* colour_quizTests.swift */; };
 		09134F75287B9A7E007753C6 /* colour_quizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09134F74287B9A7E007753C6 /* colour_quizUITests.swift */; };
 		09134F77287B9A7E007753C6 /* colour_quizUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09134F76287B9A7E007753C6 /* colour_quizUITestsLaunchTests.swift */; };
+		097A6A6B2888CE440035E57E /* GameViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097A6A6A2888CE440035E57E /* GameViewModel_Tests.swift */; };
 		09C17D742884D42E00637371 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C17D732884D42E00637371 /* GameView.swift */; };
 		09C17D762884D45700637371 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C17D752884D45700637371 /* GameViewModel.swift */; };
 		09C17D782884E53300637371 /* Ext+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C17D772884E53300637371 /* Ext+Color.swift */; };
@@ -47,6 +48,7 @@
 		09134F70287B9A7E007753C6 /* colour-quizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "colour-quizUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09134F74287B9A7E007753C6 /* colour_quizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colour_quizUITests.swift; sourceTree = "<group>"; };
 		09134F76287B9A7E007753C6 /* colour_quizUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colour_quizUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		097A6A6A2888CE440035E57E /* GameViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel_Tests.swift; sourceTree = "<group>"; };
 		09C17D732884D42E00637371 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		09C17D752884D45700637371 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		09C17D772884E53300637371 /* Ext+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Color.swift"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				09134F6A287B9A7E007753C6 /* colour_quizTests.swift */,
+				097A6A6A2888CE440035E57E /* GameViewModel_Tests.swift */,
 			);
 			path = "colour-quizTests";
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				097A6A6B2888CE440035E57E /* GameViewModel_Tests.swift in Sources */,
 				09134F6B287B9A7E007753C6 /* colour_quizTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
