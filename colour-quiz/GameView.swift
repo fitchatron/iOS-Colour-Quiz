@@ -17,28 +17,38 @@ struct GameView: View {
             ZStack {
                 PlayingView(viewModel: viewModel)
                 
-                if viewModel.gameState == .paused {
-                    PauseView(viewModel: viewModel)
+            }
+            .navigationTitle(viewModel.navTitle)
+            .onAppear { viewModel.handleStartGame()}
+            .sheet(isPresented: $viewModel.isShowingSheet, onDismiss: {
+                if viewModel.gameState == .paused { viewModel.gameState = .playing }
+            }) {
+                PauseView(viewModel: viewModel)
+            }
+//            .alert("Game Over", isPresented: $viewModel.isShowingAlert) {
+//                Button("OK", role: .cancel) { }
+//                Button("Play Again", role: .cancel) { }
+//            }
+    
+            .alert("Game Over", isPresented: $viewModel.isShowingAlert, actions: {
+                Button("Play Again", role: .none) { viewModel.handleRestartGame() }
+                Button("OK", role: .cancel) { }
+            }, message: {
+                Text("well done you got \(viewModel.score) right")
+            })
+            .onReceive(viewModel.timer) { time in viewModel.handleTimerChange() }
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    viewModel.gameState = .playing
+                } else {
+                    viewModel.gameState = .inactive
                 }
             }
-                .navigationTitle(viewModel.navTitle)
-                .onAppear { viewModel.handleStartGame()}
-                .onReceive(viewModel.timer) { time in viewModel.handleTimerChange() }
-                .onChange(of: scenePhase) { newPhase in
-                    if newPhase == .active {
-//                        viewModel.isActive = true
-                        viewModel.gameState = .paused
-                    } else {
-//                        viewModel.isActive = false
-                        viewModel.gameState = .inactive
-                    }
-                }
         }
     }
 }
 
 struct PauseView: View {
-    
     @ObservedObject var viewModel: GameViewModel
     
     var body: some View {
@@ -48,6 +58,10 @@ struct PauseView: View {
             .edgesIgnoringSafeArea(.top)
         
         VStack {
+            Text("Paused")
+                .font(.largeTitle)
+                .bold()
+            
             InfoView(score: viewModel.score, highScore: viewModel.highScore, timeRemaining: viewModel.timeRemaining)
             
             Text("Game paused. Take your time to do you.")
@@ -61,7 +75,7 @@ struct PauseView: View {
                 Label("Resume", systemImage: "play.circle.fill")
             }
             .buttonStyle(.borderedProminent)
-
+            
         }
         .padding()
         .background(Color(.systemBackground))

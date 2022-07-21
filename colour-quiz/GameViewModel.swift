@@ -12,16 +12,16 @@ class GameViewModel: ObservableObject {
     @Published var highScore = 10
     @Published var lives = 3
     @Published var timeRemaining = 5
-    @Published var gameState: GameState = .playing
+    @Published var gameState: GameState = .notStarted
     @Published var gameDifficulty: GameDifficulty = .easy
-    private var secondsAllocated: Int { gameDifficulty.secondsPerGuess }
     @Published var quizQuestion: QuizQuestion = .init(colour: .gray, text: .gray, answer: .gray)
     @Published var firstColour: Color = .gray
     @Published var secondColour: Color = .gray
+    @Published var isShowingSheet = false
+    @Published var isShowingAlert = false
 //    @Published var isActive = true
     var navTitle: String {
         switch gameState {
-            
         case .notStarted:
             return "Colour Quiz"
         case .playing:
@@ -57,6 +57,7 @@ class GameViewModel: ObservableObject {
     func handleStartGame() {
         generateQuizQuestion()
         gameState = .playing
+        print(gameState, "game state is")
     }
     
     //TODO: Randomly Generate Colour
@@ -116,7 +117,7 @@ class GameViewModel: ObservableObject {
     }
     
     func nextQuestion() {
-        timeRemaining = secondsAllocated
+        timeRemaining = gameDifficulty.secondsPerGuess
         generateQuizQuestion()
     }
     
@@ -131,6 +132,8 @@ class GameViewModel: ObservableObject {
     func togglePauseGame() {
         guard gameState != .notStarted, gameState != .gameOver else { return }
         gameState = gameState == .paused ? .playing : .paused
+        isShowingSheet = gameState == .paused ? true : false
+        print("paused has run", gameState)
     }
     
     //TODO: Handle Resume Game
@@ -141,12 +144,15 @@ class GameViewModel: ObservableObject {
         print("💀 game over")
         // check for high score
         // send alert
+        isShowingAlert = true
     }
     
     //TODO: Handle Restart Game
     func handleRestartGame() {
         lives = 3
         score = 0
+        gameDifficulty = .easy
+        timeRemaining = gameDifficulty.secondsPerGuess
         handleStartGame()
     }
     
@@ -168,15 +174,6 @@ class GameViewModel: ObservableObject {
         
         if timeRemaining <= 0 {
             handleIncorrectGuess()
-//            do {
-//                try handleLoseLife()
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//            if gameState == .playing {
-//                timeRemaining = secondsAllocated
-//                generateQuizQuestion()
-//            }
             return
         }
         
