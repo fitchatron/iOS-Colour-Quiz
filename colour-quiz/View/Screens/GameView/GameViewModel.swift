@@ -78,7 +78,7 @@ class GameViewModel: ObservableObject {
     
     // generate quiz question
     func generateQuizQuestion() {
-        let colourOptions: [Color] = [generateColourFrom(colours), generateColourFrom(colours)]
+        var colourOptions: [Color] = [generateColourFrom(colours), generateColourFrom(colours)]
         let colourIndex = Int.random(in: 0..<colourOptions.count)
         let textIndex = 1 - colourIndex
         
@@ -89,11 +89,12 @@ class GameViewModel: ObservableObject {
             var isExcludedColour = exclusions[firstColour]?.first(where: {$0 == secondColour}) != nil
             
             while isExcludedColour {
-                secondColour = generateColourFrom(colours)
+                colourOptions[textIndex] = generateColourFrom(colours)
+                secondColour = colourOptions[textIndex]
                 isExcludedColour = exclusions[firstColour]?.first(where: {$0 == secondColour}) != nil
             }
         }
-        game.quizQuestion = .init(colour: firstColour, text: secondColour, answer: secondColour)
+        game.quizQuestion = .init(colour: colourOptions.first!, text: colourOptions.last!, answer: colourOptions.last!)
     }
     
     //MARK: handle when button is tapped

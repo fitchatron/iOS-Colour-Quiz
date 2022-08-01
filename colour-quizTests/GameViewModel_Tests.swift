@@ -296,4 +296,22 @@ final class GameViewModel_Tests: XCTestCase {
         }
         
     }
+    
+    func test_GameViewModel_StressDifferentAnswers_LoseLife() {
+        // given
+        let vm = GameViewModel()
+        
+        // when
+        vm.game.allowSimilarColours = true
+        XCTAssertTrue(vm.game.allowSimilarColours)
+        vm.handleStartGame()
+        let lives = vm.game.lives
+        
+        for _ in 0..<20 {
+            let answer = vm.secondColour
+            vm.handleButtonTapped(colour: answer)
+        }
+        
+        XCTAssertLessThan(vm.game.lives, lives)
+    }
 }
