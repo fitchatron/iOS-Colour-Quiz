@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import colour_quiz
+import SwiftUI
 /*
  Naming Structure: test_UnitOfWork_StateUnderTest_ExpectedBehaviour
  Testing Structure: Given, When, Then
@@ -33,10 +34,10 @@ final class GameViewModel_Tests: XCTestCase {
         vm.handleStartGame()
         
         // then
-        XCTAssert(vm.gameState == startingGameState)
-        XCTAssert(vm.quizQuestion.colour != .gray)
-        XCTAssert(vm.quizQuestion.text != .gray)
-        XCTAssert(vm.quizQuestion.answer != .gray)
+        XCTAssert(vm.game.gameState == startingGameState)
+        XCTAssert(vm.game.quizQuestion.colour != .gray)
+        XCTAssert(vm.game.quizQuestion.text != .gray)
+        XCTAssert(vm.game.quizQuestion.answer != .gray)
     }
     
     func test_GameViewModel_lives_shouldLoseLifePass() {
@@ -45,12 +46,12 @@ final class GameViewModel_Tests: XCTestCase {
         
         // when
         let vm = GameViewModel()
-        XCTAssertEqual(vm.lives, expectedLives, accuracy: .zero)
+        XCTAssertEqual(vm.game.lives, expectedLives, accuracy: .zero)
         XCTAssertNoThrow(try vm.handleLoseLife())
         
         // then
         expectedLives = 2
-        XCTAssertEqual(vm.lives, expectedLives, accuracy: .zero)
+        XCTAssertEqual(vm.game.lives, expectedLives, accuracy: .zero)
     }
     
     func test_GameViewModel_lives_shouldLoseLifeError() {
@@ -74,14 +75,15 @@ final class GameViewModel_Tests: XCTestCase {
         
         // when
         let vm = GameViewModel()
-        vm.quizQuestion = quizQuestion
-        let score = vm.score
-        let lives = vm.lives
+        vm.game.gameState = .playing
+        vm.game.quizQuestion = quizQuestion
+        let score = vm.game.score
+        let lives = vm.game.lives
         vm.handleButtonTapped(colour: .pink)
-        
+        print(score, vm.game.score)
         // then
-        XCTAssertTrue(vm.score > score)
-        XCTAssertTrue(vm.lives == lives)
+        XCTAssertTrue(vm.game.score > score)
+        XCTAssertTrue(vm.game.lives == lives)
     }
     
     func test_GameViewModel_gameState_IncorrectGuessWithExtraLives() {
@@ -90,15 +92,16 @@ final class GameViewModel_Tests: XCTestCase {
         
         // when
         let vm = GameViewModel()
-        vm.quizQuestion = quizQuestion
-        let score = vm.score
-        let lives = vm.lives
+        vm.game.gameState = .playing
+        vm.game.quizQuestion = quizQuestion
+        let score = vm.game.score
+        let lives = vm.game.lives
         vm.handleButtonTapped(colour: .purple)
         
         // then
-        XCTAssertTrue(vm.score == score)
-        XCTAssertTrue(vm.lives < lives)
-        XCTAssertTrue(vm.gameState == .playing)
+        XCTAssertTrue(vm.game.score == score)
+        XCTAssertTrue(vm.game.lives < lives)
+        XCTAssertTrue(vm.game.gameState == .playing)
     }
     
     func test_GameViewModel_gameState_IncorrectGuessWithoutExtraLives() {
@@ -107,12 +110,13 @@ final class GameViewModel_Tests: XCTestCase {
         
         // when
         let vm = GameViewModel()
-        vm.quizQuestion = quizQuestion
-        vm.lives = 1
+        vm.game.gameState = .playing
+        vm.game.quizQuestion = quizQuestion
+        vm.game.lives = 1
         vm.handleButtonTapped(colour: .purple)
         
         // then
-        XCTAssertTrue(vm.gameState == .gameOver)
+        XCTAssertTrue(vm.game.gameState == .gameOver)
     }
     
     func test_GameViewModel_gameState_PauseGame() {
@@ -125,7 +129,7 @@ final class GameViewModel_Tests: XCTestCase {
         vm.togglePauseGame()
         
         // then
-        XCTAssertTrue(vm.gameState == .paused)
+        XCTAssertTrue(vm.game.gameState == .paused)
     }
     
     func test_GameViewModel_gameState_ResumeGame() {
@@ -136,10 +140,10 @@ final class GameViewModel_Tests: XCTestCase {
         vm.handleStartGame()
         
         vm.togglePauseGame()
-        XCTAssertTrue(vm.gameState == .paused)
+        XCTAssertTrue(vm.game.gameState == .paused)
         vm.togglePauseGame()
         // then
-        XCTAssertTrue(vm.gameState == .playing)
+        XCTAssertTrue(vm.game.gameState == .playing)
     }
     
     func test_GameViewModel_gameDifficulty_EasyToMedium() {
@@ -148,13 +152,13 @@ final class GameViewModel_Tests: XCTestCase {
         let startScore = 15
         // when
         let vm = GameViewModel()
-        vm.quizQuestion = quizQuestion
-        vm.gameState = .playing
-        vm.score = startScore
+        vm.game.quizQuestion = quizQuestion
+        vm.game.gameState = .playing
+        vm.game.score = startScore
         vm.handleButtonTapped(colour: .pink)
         
         // then
-        XCTAssertTrue(vm.gameDifficulty == .medium)
+        XCTAssertTrue(vm.game.gameDifficulty == .medium)
     }
     
     func test_GameViewModel_gameDifficulty_MediumToHard() {
@@ -163,13 +167,13 @@ final class GameViewModel_Tests: XCTestCase {
         let startScore = 40
         // when
         let vm = GameViewModel()
-        vm.quizQuestion = quizQuestion
-        vm.gameState = .playing
-        vm.score = startScore
+        vm.game.quizQuestion = quizQuestion
+        vm.game.gameState = .playing
+        vm.game.score = startScore
         vm.handleButtonTapped(colour: .pink)
         
         // then
-        XCTAssertTrue(vm.gameDifficulty == .medium)
+        XCTAssertTrue(vm.game.gameDifficulty == .medium)
     }
     
     func test_GameViewModel_gameDifficulty_HardToInsane() {
@@ -178,12 +182,118 @@ final class GameViewModel_Tests: XCTestCase {
         let startScore = 99
         // when
         let vm = GameViewModel()
-        vm.quizQuestion = quizQuestion
-        vm.gameState = .playing
-        vm.score = startScore
+        vm.game.quizQuestion = quizQuestion
+        vm.game.gameState = .playing
+        vm.game.score = startScore
         vm.handleButtonTapped(colour: .pink)
         
         // then
-        XCTAssertTrue(vm.gameDifficulty == .medium)
+        XCTAssertTrue(vm.game.gameDifficulty == .medium)
+    }
+    
+    func test_GameViewModel_excludedColour_failCheck() {
+        // given
+        let exclusions:[Color: [Color]] = [
+            .cyan: [.teal, .mint],
+            .mint: [.teal, .cyan],
+            .pink: [.red],
+            .red: [.pink],
+            .teal: [.cyan, .mint]
+        ]
+        
+    
+        // when
+        
+        
+        let firstColour: Color = .cyan
+        let secondColour: Color = .mint
+        
+        let isExcludedColour = exclusions[firstColour]?.first(where: {$0 == secondColour}) != nil
+        // then
+        XCTAssertTrue(isExcludedColour)
+    }
+    
+    func test_GameViewModel_excludedColour_passCheck() {
+        // given
+        
+        let exclusions:[Color: [Color]] = [
+            .cyan: [.teal, .mint],
+            .mint: [.teal, .cyan],
+            .pink: [.red],
+            .red: [.pink],
+            .teal: [.cyan, .mint]
+        ]
+        
+    
+        // when
+        
+        
+        let firstColour: Color = .cyan
+        var secondColour: Color = .mint
+        
+        var isExcludedColour = exclusions[firstColour]?.first(where: {$0 == secondColour}) != nil
+        
+        while isExcludedColour {
+            secondColour = .orange
+            isExcludedColour = exclusions[firstColour]?.first(where: {$0 == secondColour}) != nil
+        }
+        
+        // then
+        XCTAssertFalse(isExcludedColour)
+    }
+    
+    func test_GameViewModel_excludedColour_StressPassCheck() {
+        // given
+        let exclusions:[Color: [Color]] = [
+            .cyan: [.teal, .mint],
+            .mint: [.teal, .cyan],
+            .pink: [.red],
+            .red: [.pink],
+            .teal: [.cyan, .mint]
+        ]
+        
+        // when
+        let vm = GameViewModel()
+        XCTAssertFalse(vm.game.allowSimilarColours)
+        for index in 0..<100 {
+            vm.generateQuizQuestion()
+            
+            let firstColour: Color = vm.game.quizQuestion.colour
+            let secondColour: Color = vm.game.quizQuestion.text
+            
+            let isExcludedColour = exclusions[firstColour]?.first(where: {$0 == secondColour}) != nil
+            print(index, firstColour.stringify, secondColour.stringify, isExcludedColour)
+            // then
+            XCTAssertFalse(isExcludedColour)
+        }
+        
+    }
+    
+    func test_GameViewModel_NoExludedColour_StressPassCheck() {
+        // given
+        let exclusions:[Color: [Color]] = [
+            .cyan: [.teal, .mint],
+            .mint: [.teal, .cyan],
+            .pink: [.red],
+            .red: [.pink],
+            .teal: [.cyan, .mint]
+        ]
+        
+        // when
+        let vm = GameViewModel()
+        vm.game.allowSimilarColours = true
+        XCTAssertTrue(vm.game.allowSimilarColours)
+        for index in 0..<100 {
+            vm.generateQuizQuestion()
+            
+            let firstColour: Color = vm.game.quizQuestion.colour
+            let secondColour: Color = vm.game.quizQuestion.text
+            
+            let isExcludedColour = exclusions[firstColour]?.first(where: {$0 == secondColour}) != nil
+            if isExcludedColour { print(index, firstColour.stringify, secondColour.stringify, isExcludedColour) }
+            // then
+            XCTAssertTrue(isExcludedColour || !isExcludedColour)
+        }
+        
     }
 }

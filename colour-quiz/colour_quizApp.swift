@@ -11,7 +11,7 @@ import SwiftUI
 struct colour_quizApp: App {
     var body: some Scene {
         WindowGroup {
-            GameView()
+            HomeView()
         }
     }
 }
