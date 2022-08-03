@@ -12,6 +12,7 @@ struct colour_quizApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .environmentObject(UserDefaultsManager())
         }
     }
 }

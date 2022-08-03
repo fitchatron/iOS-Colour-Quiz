@@ -7,8 +7,10 @@
 
 import Foundation
 
-enum GameDifficulty: Int {
+enum GameDifficulty: Int, CaseIterable,Identifiable {
     case easy, medium, hard, insane
+    
+    var id: GameDifficulty {self}
     
     var name: String {
         return "\(self)".map {

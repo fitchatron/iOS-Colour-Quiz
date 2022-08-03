@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var userDefaultsManager: UserDefaultsManager
     @StateObject private var viewModel = GameViewModel()
     
     var body: some View {
@@ -18,7 +19,7 @@ struct GameView: View {
             
         }
         .navigationTitle(viewModel.navTitle)
-        .onAppear { viewModel.handleStartGame()}
+        .onAppear { viewModel.handleStartGame(difficulty: userDefaultsManager.defaultDifficulty, allowSimilarColours: userDefaultsManager.similarColours)}
         .sheet(isPresented: $viewModel.isShowingSheet, onDismiss: {
             if viewModel.game.gameState == .paused { viewModel.game.gameState = .playing }
         }) {
@@ -26,12 +27,12 @@ struct GameView: View {
         }
         
         .alert("Game Over", isPresented: $viewModel.isShowingAlert, actions: {
-            Button("Play Again", role: .none) { viewModel.handleRestartGame() }
+            Button("Play Again", role: .none) { viewModel.handleRestartGame(difficulty: userDefaultsManager.defaultDifficulty, allowSimilarColours: userDefaultsManager.similarColours) }
             Button("OK", role: .cancel) { }
         }, message: {
             Text("well done you got \(viewModel.game.score) right")
         })
-        .onReceive(viewModel.timer) { time in viewModel.handleTimerChange() }
+        .onReceive(viewModel.timer) { time in viewModel.handleTimerChange(userDefaultsManager) }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
                 viewModel.game.gameState = .playing

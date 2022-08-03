@@ -25,7 +25,7 @@ struct ColourListView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Check out the colours below so you know what is what. Be casreful, some of the colours are deceptively similar.")
+            Text("Check out the colours below so you know what is what. Be careful, some of the colours are deceptively similar.")
                 .padding()
             
             List {

@@ -7,42 +7,44 @@
 
 import SwiftUI
 
-struct PauseView: View {
-    @ObservedObject var viewModel: GameViewModel
-    
-    var body: some View {
-        Color(.systemBackground)
-            .opacity(0.9)
-            .edgesIgnoringSafeArea(.horizontal)
-            .edgesIgnoringSafeArea(.top)
+extension GameView {
+    struct PauseView: View {
+        @ObservedObject var viewModel: GameViewModel
         
-        VStack {
-            Text("Paused")
-                .font(.largeTitle)
-                .bold()
+        var body: some View {
+            Color(.systemBackground)
+                .opacity(0.9)
+                .edgesIgnoringSafeArea(.horizontal)
+                .edgesIgnoringSafeArea(.top)
             
-            InfoView(viewModel: viewModel)
-            
-            Text("Game paused. Take your time to do you.")
-                .font(.headline)
-            
-            Spacer()
-            
-            Button {
-                viewModel.togglePauseGame()
-            } label: {
-                Label("Resume", systemImage: "play.circle.fill")
+            VStack {
+                Text("Paused")
+                    .font(.largeTitle)
+                    .bold()
+                
+                InfoView(viewModel: viewModel)
+                
+                Text("Game paused. Take your time to do you.")
+                    .font(.headline)
+                
+                Spacer()
+                
+                Button {
+                    viewModel.togglePauseGame()
+                } label: {
+                    Label("Resume", systemImage: "play.circle.fill")
+                }
+                .buttonStyle(.borderedProminent)
+                
             }
-            .buttonStyle(.borderedProminent)
-            
+            .padding()
+            .background(Color(.systemBackground))
         }
-        .padding()
-        .background(Color(.systemBackground))
     }
 }
 
-struct PauseView_Previews: PreviewProvider {
-    static var previews: some View {
-        PauseView(viewModel: GameViewModel())
-    }
-}
+//struct PauseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PauseView(viewModel: GameViewModel())
+//    }
+//}
